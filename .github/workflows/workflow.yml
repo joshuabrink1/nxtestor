@@ -20,8 +20,9 @@ jobs:
           node-version: '16'
           cache: 'npm'
       - run: npm install
+     
       - run: npx nx run-many --target=test --all --parallel --coverage
-
+      - run: node ./tools/coverageMerger.js
       - uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
