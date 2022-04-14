@@ -1,0 +1,28 @@
+{
+  "root": "apps/nxtester-e2e",
+  "sourceRoot": "apps/nxtester-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/nxtester-e2e/cypress.json",
+        "devServerTarget": "nxtester:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "nxtester:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nxtester-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["nxtester"]
+}

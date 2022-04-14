@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/nxtester",
+  "sourceRoot": "apps/nxtester/src",
+  "prefix": "tester",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/nxtester",
+        "index": "apps/nxtester/src/index.html",
+        "main": "apps/nxtester/src/main.ts",
+        "polyfills": "apps/nxtester/src/polyfills.ts",
+        "tsConfig": "apps/nxtester/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/nxtester/src/favicon.ico", "apps/nxtester/src/assets"],
+        "styles": ["apps/nxtester/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/nxtester/src/environments/environment.ts",
+              "with": "apps/nxtester/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "nxtester:build:production"
+        },
+        "development": {
+          "browserTarget": "nxtester:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/nxtester/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "nxtester:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/nxtester/src/**/*.ts",
+          "apps/nxtester/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/nxtester"],
+      "options": {
+        "jestConfig": "apps/nxtester/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
