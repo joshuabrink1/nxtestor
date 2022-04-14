@@ -12,6 +12,16 @@ jobs:
       steps:
       - name: Checkout develop
         uses: actions/checkout@v2
+
+      #Installs node.js
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - run: npm install
+      - run: npx nx test --coverage --coverageReporters=lcov
+
       - uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
